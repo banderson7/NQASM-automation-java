@@ -32,7 +32,6 @@ public class LandingPageTest {
         Assert.assertEquals(driver.getTitle(), this.pageTitle);
     }
 
-
     @Test
     public void assertHeader(){
         Assert.assertEquals(landingPage.getHeaderText(), this.headerText);

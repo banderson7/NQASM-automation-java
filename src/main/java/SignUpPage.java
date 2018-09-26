@@ -7,6 +7,8 @@ public class SignUpPage {
 
     private By header = By.className("display-4");
 
+    public String getPageUrl(){ return url; }
+
     public SignUpPage(WebDriver driver){
         this.driver = driver;
         this.url = "http://localhost:3000/register";
