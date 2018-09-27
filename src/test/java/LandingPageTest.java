@@ -1,3 +1,6 @@
+import Pages.LandingPage;
+import Pages.LoginPage;
+import Pages.SignUpPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;

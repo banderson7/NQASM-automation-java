@@ -1,8 +1,13 @@
+package Pages;
+
+import Utils.PageUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SignUpPage {
     private final WebDriver driver;
+    private final PageUtil pageUtil;
     private final String url;
 
     private By header = By.className("display-4");
@@ -21,7 +26,10 @@ public class SignUpPage {
 
     public SignUpPage(WebDriver driver){
         this.driver = driver;
+        this.pageUtil = new PageUtil(driver);
         this.url = "http://localhost:3000/register";
+
+        pageUtil.waitForUrl(url);
     }
 
     public String getHeaderText() {
@@ -32,7 +40,10 @@ public class SignUpPage {
 
     public String getNameFieldText() { return driver.findElement(nameField).getAttribute("value");}
 
-    public String getNameErrorText() { return driver.findElement(nameError).getText(); }
+    public String getNameErrorText() {
+        WebElement nameErrorText = pageUtil.waitForElementToBeVisible(nameError);
+        return nameErrorText.getText();
+    }
 
     public String getEmailErrorText() { return driver.findElement(emailError).getText(); }
 
@@ -48,4 +59,15 @@ public class SignUpPage {
         driver.findElement(nameField).sendKeys(text);
     }
 
+    public void enterEmail(String text){
+        driver.findElement(emailField).sendKeys(text);
+    }
+
+    public void enterPassword(String text){
+        driver.findElement(passwordField).sendKeys(text);
+    }
+
+    public void enterPassword2(String text){
+        driver.findElement(password2Field).sendKeys(text);
+    }
 }
