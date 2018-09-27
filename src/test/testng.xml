@@ -7,4 +7,9 @@
             <class name="LandingPageTest"></class>
         </classes>
     </test>
+    <test name="SignUp Page Tests">
+        <classes>
+            <class name="SignUpPageTest"></class>
+        </classes>
+    </test>
 </suite>
