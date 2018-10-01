@@ -1,13 +1,11 @@
 import Pages.LandingPage;
 import Pages.LoginPage;
 import Pages.SignUpPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class LandingPageTest {
-    private WebDriver driver;
+public class LandingPageTest extends BaseTest {
     private LandingPage landingPage;
     private SignUpPage signUpPage;
     private LoginPage loginPage;
@@ -17,9 +15,7 @@ public class LandingPageTest {
     private final String pageTitle = "NQA Social Media";
 
     @BeforeClass
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "/Users/bianders/Documents/dev/NQATestAutomation/drivers/chromedriver");
-        this.driver = new ChromeDriver();
+    public void launchPage(){
         this.landingPage = new LandingPage(this.driver);
         driver.get(landingPage.getPageUrl());
     }
@@ -27,12 +23,7 @@ public class LandingPageTest {
     // Returns to or refreshes the landing page, because some tests navigate away
     @BeforeMethod
     public void returnToLanding(){
-        driver.get(landingPage.getPageUrl());
-    }
-
-    @Test
-    public void assertTitle(){
-        Assert.assertEquals(driver.getTitle(), this.pageTitle);
+        landingPage.goToPageUrl();
     }
 
     @Test
@@ -68,8 +59,5 @@ public class LandingPageTest {
         this.loginPage = new LoginPage(this.driver);
         Assert.assertEquals(loginPage.getHeaderText(), "Log In");
     }
-
-    @AfterClass
-    public void tearDown(){ driver.close(); }
 
 }

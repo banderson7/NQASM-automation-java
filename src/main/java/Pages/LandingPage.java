@@ -19,6 +19,8 @@ public class LandingPage {
 
     public String getPageUrl(){ return url; }
 
+    public void goToPageUrl(){ driver.get(url); }
+
     public String getHeaderText() {
         return driver.findElement(header).getText();
     }

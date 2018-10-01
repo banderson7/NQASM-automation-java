@@ -4,6 +4,7 @@ import Utils.PageUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import java.util.Random;
 
 public class SignUpPage {
     private final WebDriver driver;
@@ -29,27 +30,34 @@ public class SignUpPage {
         this.pageUtil = new PageUtil(driver);
         this.url = "http://localhost:3000/register";
 
-        pageUtil.waitForUrl(url);
     }
 
     public String getHeaderText() {
+        pageUtil.waitForUrl(url);
         return driver.findElement(header).getText();
     }
 
     public String getSubHeaderText() { return driver.findElement(subHeader).getText(); }
-
-    public String getNameFieldText() { return driver.findElement(nameField).getAttribute("value");}
 
     public String getNameErrorText() {
         WebElement nameErrorText = pageUtil.waitForElementToBeVisible(nameError);
         return nameErrorText.getText();
     }
 
-    public String getEmailErrorText() { return driver.findElement(emailError).getText(); }
+    public String getEmailErrorText() {
+        WebElement emailErrorText = pageUtil.waitForElementToBeVisible(emailError);
+        return emailErrorText.getText();
+    }
 
-    public String getPasswordErrorText() { return driver.findElement(passwordError).getText(); }
+    public String getPasswordErrorText() {
+        WebElement passwordErrorText = pageUtil.waitForElementToBeVisible(passwordError);
+        return passwordErrorText.getText();
+    }
 
-    public String getPassword2ErrorText() { return driver.findElement(password2Error).getText(); }
+    public String getPassword2ErrorText() {
+        WebElement password2ErrorText = pageUtil.waitForElementToBeVisible(password2Error);
+        return password2ErrorText.getText();
+    }
 
     public void clickSubmit(){
         driver.findElement(submitButton).click();
@@ -69,5 +77,16 @@ public class SignUpPage {
 
     public void enterPassword2(String text){
         driver.findElement(password2Field).sendKeys(text);
+    }
+
+    public String getSubmitButtonText(){
+        return driver.findElement(submitButton).getText();
+    }
+
+    public String generateRandomEmail(){
+        Random rand = new Random();
+        // Random number between 1 and 1000;
+        int n = rand.nextInt(1000) + 1;
+        return "test" + n + "@email.com";
     }
 }

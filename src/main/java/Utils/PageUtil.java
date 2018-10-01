@@ -7,11 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageUtil {
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     public PageUtil(WebDriver driver){
-        this.driver = driver;
          wait = new WebDriverWait(driver, 10);
     }
 
@@ -22,4 +21,5 @@ public class PageUtil {
     public WebElement waitForElementToBeVisible(By elementLocation){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocation));
     }
+
 }

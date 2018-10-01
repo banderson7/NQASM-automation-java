@@ -1,13 +1,10 @@
 import Pages.LoginPage;
 import Pages.SignUpPage;
-import Utils.PageUtil;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class SignUpPageTest {
-    private WebDriver driver;
+public class SignUpPageTest extends BaseTest {
     private SignUpPage signUpPage;
     private LoginPage loginPage;
 
@@ -21,11 +18,11 @@ public class SignUpPageTest {
     private final String emailInvalidError = "Email is invalid";
     private final String passwordInvalidLengthError = "Password must be between 6 and 30 characters";
     private final String password2NoMatchError = "Passwords must match";
+    private final String emailAlreadyExistsErrors = "Email already exists";
+
 
     @BeforeClass
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "/Users/bianders/Documents/dev/NQATestAutomation/drivers/chromedriver");
-        this.driver = new ChromeDriver();
+    public void launchPage(){
         this.signUpPage = new SignUpPage(this.driver);
         driver.get(signUpPage.getPageUrl());
     }
@@ -41,13 +38,16 @@ public class SignUpPageTest {
         Assert.assertEquals(signUpPage.getHeaderText(), this.headerText);
     }
 
-    @Test (enabled=false)
+    @Test
     public void assertSubHeader(){
         Assert.assertEquals(signUpPage.getSubHeaderText(), this.subHeaderText);
     }
 
-    // TODO: Need to add waiting for error messages to be visible.
-    // Currently seeing tests occasionally fail because it can't find the element when it should
+    @Test
+    public void assertSubmitButtonText(){
+        Assert.assertEquals(signUpPage.getSubmitButtonText(), "Submit");
+    }
+
     @Test (description = "Click submit and verify all error messages display")
     public void assertEmptySubmit(){
         signUpPage.clickSubmit();
@@ -77,7 +77,16 @@ public class SignUpPageTest {
         signUpPage.clickSubmit();
         Assert.assertEquals(signUpPage.getEmailErrorText(), this.emailInvalidError);
     }
-    // TODO: Add email already exists test
+
+    @Test
+    public void assertEmailExistsSubmit(){
+        signUpPage.enterName("Automation User");
+        signUpPage.enterEmail("test@test.com");
+        signUpPage.enterPassword("password");
+        signUpPage.enterPassword2("password");
+        signUpPage.clickSubmit();
+        Assert.assertEquals(signUpPage.getEmailErrorText(), this.emailAlreadyExistsErrors);
+    }
 
     @Test
     public void assertPasswordTooShortSubmit(){
@@ -104,14 +113,11 @@ public class SignUpPageTest {
     @Test
     public void assertSuccessfulRegister(){
         signUpPage.enterName("Automation User");
-        signUpPage.enterEmail("btest@nerdery.com");
+        signUpPage.enterEmail(signUpPage.generateRandomEmail());
         signUpPage.enterPassword("password");
         signUpPage.enterPassword2("password");
         signUpPage.clickSubmit();
         this.loginPage = new LoginPage(this.driver);
         Assert.assertEquals(loginPage.getHeaderText(), "Log In");
     }
-
-    @AfterClass
-    public void tearDown(){ driver.close(); }
 }

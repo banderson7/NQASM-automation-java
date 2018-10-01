@@ -17,12 +17,12 @@ public class LoginPage {
         this.url = "http://localhost:3000/login";
         this.pageUtil = new PageUtil(driver);
 
-        pageUtil.waitForUrl(url);
     }
 
     public String getPageUrl(){ return url;}
 
     public String getHeaderText() {
+        pageUtil.waitForUrl(url);
         return driver.findElement(header).getText();
     }
 }
