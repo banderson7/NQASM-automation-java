@@ -1,14 +1,10 @@
 package Pages;
 
-import Utils.PageUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import java.util.Random;
 
-public class SignUpPage {
-    private final WebDriver driver;
-    private final PageUtil pageUtil;
+public class SignUpPage extends BasePage {
     private final String url;
 
     private By header = By.className("display-4");
@@ -25,62 +21,56 @@ public class SignUpPage {
 
     public String getPageUrl(){ return url; }
 
-    public SignUpPage(WebDriver driver){
-        this.driver = driver;
-        this.pageUtil = new PageUtil(driver);
+    public SignUpPage(WebDriver webDriver){
+        super(webDriver);
         this.url = "http://localhost:3000/register";
 
     }
 
     public String getHeaderText() {
-        pageUtil.waitForUrl(url);
-        return driver.findElement(header).getText();
+        return element(header).getText();
     }
 
-    public String getSubHeaderText() { return driver.findElement(subHeader).getText(); }
+    public String getSubHeaderText() { return element(subHeader).getText(); }
 
     public String getNameErrorText() {
-        WebElement nameErrorText = pageUtil.waitForElementToBeVisible(nameError);
-        return nameErrorText.getText();
+        return elementWhenVisible(nameError).getText();
     }
 
     public String getEmailErrorText() {
-        WebElement emailErrorText = pageUtil.waitForElementToBeVisible(emailError);
-        return emailErrorText.getText();
+        return elementWhenVisible(emailError).getText();
     }
 
     public String getPasswordErrorText() {
-        WebElement passwordErrorText = pageUtil.waitForElementToBeVisible(passwordError);
-        return passwordErrorText.getText();
+        return elementWhenVisible(passwordError).getText();
     }
 
     public String getPassword2ErrorText() {
-        WebElement password2ErrorText = pageUtil.waitForElementToBeVisible(password2Error);
-        return password2ErrorText.getText();
+        return elementWhenVisible(password2Error).getText();
     }
 
     public void clickSubmit(){
-        driver.findElement(submitButton).click();
+        click(submitButton);
     }
 
     public void enterName(String text){
-        driver.findElement(nameField).sendKeys(text);
+        enterText(nameField, text);
     }
 
     public void enterEmail(String text){
-        driver.findElement(emailField).sendKeys(text);
+        enterText(emailField, text);
     }
 
     public void enterPassword(String text){
-        driver.findElement(passwordField).sendKeys(text);
+        enterText(passwordField, text);
     }
 
     public void enterPassword2(String text){
-        driver.findElement(password2Field).sendKeys(text);
+        enterText(password2Field, text);
     }
 
     public String getSubmitButtonText(){
-        return driver.findElement(submitButton).getText();
+        return element(submitButton).getAttribute("value");
     }
 
     public String generateRandomEmail(){

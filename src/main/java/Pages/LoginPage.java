@@ -1,28 +1,20 @@
 package Pages;
 
-import Utils.PageUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    private final WebDriver driver;
-    private final PageUtil pageUtil;
+public class LoginPage extends BasePage {
     private final String url;
 
     private By header = By.className("display-4");
-    private By fullDisplay = By.className("login");
 
-    public LoginPage(WebDriver driver){
-        this.driver = driver;
+    public LoginPage(WebDriver webDriver){
+        super(webDriver);
         this.url = "http://localhost:3000/login";
-        this.pageUtil = new PageUtil(driver);
 
     }
 
-    public String getPageUrl(){ return url;}
-
     public String getHeaderText() {
-        pageUtil.waitForUrl(url);
         return driver.findElement(header).getText();
     }
 }
