@@ -102,7 +102,7 @@ public class SignUpPageTest extends BaseTest {
         Assert.assertEquals(signUpPage.getPassword2ErrorText(), ErrorMessages.password2NoMatch);
     }
 
-    @Test
+    @Test(enabled = false)
     public void assertSuccessfulRegister(){
         signUpPage.enterName("Automation User");
         signUpPage.enterEmail(signUpPage.generateRandomEmail());

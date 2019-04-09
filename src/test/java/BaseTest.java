@@ -35,6 +35,9 @@ public class BaseTest {
         else if (env.equals("prod")){
             baseURL = "https://nqa-social-media-prod.herokuapp.com";
         }
+        else{
+
+        }
 
 
     }
