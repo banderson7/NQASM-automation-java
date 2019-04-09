@@ -12,18 +12,18 @@ public class LandingPageTest extends BaseTest {
 
     private final String headerText = "NQA Social Media";
     private final String subHeaderText = "Create a profile, share posts and test";
-    private final String pageTitle = "NQA Social Media";
 
     @BeforeClass
     public void launchPage(){
         this.landingPage = new LandingPage(this.driver);
-        driver.get(landingPage.getPageUrl());
+        String url = baseURL + landingPage.getPageUrl();
+        driver.get(url);
     }
 
     // Returns to or refreshes the landing page, because some tests navigate away
     @BeforeMethod
     public void returnToLanding(){
-        landingPage.goToPageUrl();
+        driver.get(baseURL + landingPage.getPageUrl());
     }
 
     @Test

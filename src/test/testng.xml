@@ -4,16 +4,10 @@
 <suite name="Full Suite">
     <test name="Chrome">
         <parameter name="browser"  value="chrome"/>
+        <parameter name="env" value="local"/>
+        <parameter name="headless" value="false"/>
         <classes>
             <class name="LandingPageTest"></class>
-            <class name="SignUpPageTest"></class>
-        </classes>
-    </test>
-    <test name="Firefox">
-        <parameter name="browser"  value="firefox"/>
-        <classes>
-            <class name="LandingPageTest"></class>
-            <class name="SignUpPageTest"></class>
         </classes>
     </test>
 </suite>

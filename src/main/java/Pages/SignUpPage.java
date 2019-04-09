@@ -23,8 +23,7 @@ public class SignUpPage extends BasePage {
 
     public SignUpPage(WebDriver webDriver){
         super(webDriver);
-        this.url = "http://localhost:3000/register";
-
+        this.url = "/register";
     }
 
     public String getHeaderText() {

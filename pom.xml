@@ -21,9 +21,25 @@
             <artifactId>testng</artifactId>
             <version>6.10</version>
         </dependency>
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.8</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                    <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+    </profiles>
 </project>

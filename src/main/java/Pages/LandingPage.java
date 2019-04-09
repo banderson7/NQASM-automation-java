@@ -13,12 +13,11 @@ public class LandingPage extends BasePage {
 
     public LandingPage(WebDriver webDriver){
         super(webDriver);
-        this.url = "http://localhost:3000/";
+        // TODO: Pull these URLs out of the classes and allow for multiple environments
+        this.url = "";
     }
 
     public String getPageUrl(){ return url; }
-
-    public void goToPageUrl(){ driver.get(url); }
 
     public String getHeaderText() {
         return element(header).getText();
